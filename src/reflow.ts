@@ -24,9 +24,11 @@ export class Reflow {
   constructor(root: HTMLElement) {
     const viewport = createElement('div', 'viewport');
     viewport.tabIndex = -1;
+
     this.viewport = viewport;
     this.nodes = new StateMap();
 
+    useDraggable(root, { target: viewport });
     root.setAttribute(ATTRIBUTE_NAME, 'root');
     root.appendChild(viewport);
   }

@@ -1,27 +1,27 @@
-type UseDraggableCallback = (props: {
-  element: HTMLElement;
+type DragEventCallback = (props: {
   posX: number;
   posY: number;
   event: Event;
 }) => void;
 
 type UseDraggableProps = {
+  target?: HTMLElement;
   posX?: number;
   posY?: number;
   //onDragStart(): void;
   //onDrag(): void;
-  onDragEnd: UseDraggableCallback;
+  onDragEnd?: DragEventCallback;
 };
 
 export function useDraggable(node: HTMLElement, props?: UseDraggableProps) {
-  const { posX = 0, posY = 0 } = props ?? {};
-  let offsetX = posX;
-  let offsetY = posY;
+  let offsetX = props?.posX || 0;
+  let offsetY = props?.posY || 0;
   let tempX = 0;
   let tempY = 0;
 
   function setPosition(x: number, y: number) {
-    node.style.transform = `translate3d(${x}px, ${y}px, 0px)`;
+    const target = props?.target ?? node;
+    target.style.translate = `${x}px ${y}px`;
   }
 
   function handlePointerMove(event: PointerEvent) {
@@ -35,8 +35,7 @@ export function useDraggable(node: HTMLElement, props?: UseDraggableProps) {
   }
 
   function handlePointerUp(event: PointerEvent) {
-    props?.onDragEnd({
-      element: node,
+    props?.onDragEnd?.({
       posX: offsetX,
       posY: offsetY,
       event,
@@ -53,6 +52,7 @@ export function useDraggable(node: HTMLElement, props?: UseDraggableProps) {
 
     document.addEventListener('pointermove', handlePointerMove);
     document.addEventListener('pointerup', handlePointerUp);
+    event.stopPropagation();
   });
 
   setPosition(offsetX, offsetY);
