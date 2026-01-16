@@ -1,0 +1,45 @@
+:root {
+  --reflow-color: #212121;
+  --reflow-background: #fff;
+  --reflow-background-title: #f7f7f7;
+  --reflow-border: #cacaca;
+  --flow-grid-size: 25px;
+}
+
+[data-reflow='root'] {
+  width: 100%;
+  height: 100%;
+  background-size: var(--flow-grid-size) var(--flow-grid-size);
+  background-image: linear-gradient(to right, #f1f1f1 1px, transparent 1px),
+    linear-gradient(to bottom, #f1f1f1 1px, transparent 1px);
+  overflow: hidden;
+}
+
+[data-reflow='viewport'] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+[data-reflow='node'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  min-height: 40px;
+  border: 1px solid var(--reflow-border);
+  border-radius: 4px;
+  background: var(--reflow-background);
+}
+[data-reflow='node']:focus {
+  outline: 1px solid;
+}
+[data-reflow='node-title'] {
+  font-weight: bold;
+  padding: 1rem;
+  background: var(--reflow-background-title);
+  user-select: none;
+}
+[data-reflow='node-body'] {
+  padding: 1rem;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/reflow.css" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        font-family: sans-serif;
+      }
+    </style>
+    <title>reflow</title>
+  </head>
+  <body>
+    <div class="toolbar">
+      <button id="addNode">Add</button>
+      <button id="export">Export</button>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="src/index.ts"></script>
+  </body>
+</html>
